@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Andika Syaputra</title>
+
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4; /* Background abu sangat terang, semi-minimalis */
+        }
+
+        /* NAVBAR KUSTOM */
+        .navbar {
+            background-color: rgba(20, 20, 20, 0.92) !important; /* Hitam pekat semi transparan */
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        /* HERO SECTION DENGAN GRADIENT Monokrom */
+        .hero {
+            padding: 140px 0 100px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #3d3d3d 50%, #595959 100%); /* Gradient hitam ke abu gelap */
+            color: #f4f4f4;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* PERBAIKAN GAMBAR PROFIL & ANIMASI */
+        .hero img {
+            display: block;
+            margin: 0 auto;
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 6px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* ===== ANIMASI KOMPLEKS UNTUK NAMA ===== */
+        .name-title {
+            margin-top: 1rem;
+            font-weight: 700;
+            display: inline-block;
+            background: linear-gradient(
+                90deg,
+                #ffffff 0%,
+                #9a9a9a 25%,
+                #ffffff 50%,
+                #9a9a9a 75%,
+                #ffffff 100%
+            );
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+            animation:
+                shineMove 6s linear infinite,
+                nameReveal 1.4s ease-out forwards,
+                nameFlicker 8s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes shineMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 250% 50%; }
+        }
+
+        @keyframes nameReveal {
+            0% {
+                opacity: 0;
+                letter-spacing: 0.4em;
+                transform: translateY(25px) scale(0.92);
+                filter: blur(6px);
+            }
+            60% {
+                opacity: 1;
+                filter: blur(0px);
+            }
+            100% {
+                opacity: 1;
+                letter-spacing: normal;
+                transform: translateY(0) scale(1);
+                filter: blur(0px);
+            }
+        }
+
+        @keyframes nameFlicker {
+            0%, 92%, 100% { text-shadow: 0 0 25px rgba(255, 255, 255, 0.15); }
+            94% { text-shadow: 0 0 40px rgba(255, 255, 255, 0.45); }
+            96% { text-shadow: 0 0 15px rgba(255, 255, 255, 0.1); }
+        }
+        /* ===== AKHIR ANIMASI NAMA ===== */
+
+        .btn-custom {
+            background-color: #1a1a1a;
+            color: #ffffff; /* Teks putih di atas tombol hitam */
+            font-weight: 600;
+            border-radius: 30px;
+            padding: 12px 35px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .btn-custom:hover {
+            background-color: #000000;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+            color: #ffffff;
+        }
+
+        /* KARTU PORTFOLIO INTERAKTIF */
+        .portfolio-card {
+            background: #ffffff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e6e6e6;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .portfolio-card img {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            height: auto;
+            object-fit: cover;
+            border-bottom: 1px solid #f0f0f0;
+            filter: grayscale(15%);
+        }
+
+        .portfolio-content {
+            padding: 20px;
+        }
+
+        /* KOTAK KONTAK */
+        .contact-box {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid #ebebeb;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 12px 15px;
+            border: 1px solid #d9d9d9;
+            transition: all 0.3s;
+            background-color: #fafafa;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+            border-color: #595959;
+            background-color: white;
+        }
+        
+        /* OVERRIDE BOOTSTRAP BUTTON AGAR SENADA MONOKROM */
+        .btn-primary {
+            background-color: #1a1a1a !important;
+            border-color: #1a1a1a !important;
+        }
+        
+        .btn-primary:hover {
+            background-color: #000000 !important;
+            border-color: #000000 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Portfolio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero text-center">
+        <div class="container">
+            <img src="Asset/profile pic.jpg" alt="Profile Rana">
+            <h1 class="mt-4 fw-bold name-title">Rana Septiana Shabira</h1>
+            <p class="lead mb-4">Mahasiswa Sistem Informasi | Universitas Pamulang</p>
+            <a href="#portfolio" class="btn btn-custom btn-lg">Lihat Karya Saya</a>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-5">
+        <div class="container mt-4">
+            <h2 class="text-center fw-bold mb-5" style="color: #1a1a1a;">Karya Saya</h2>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="portfolio-card h-100">
+                        <img src="Asset/WhatsApp Image 2026-06-26 at 2.24.43 PM.jpeg" alt="Senja di Kapal Ferry Bakauheni">
+                        <div class="portfolio-content">
+                            <h5 class="fw-bold">Senja di Atas Kapal Ferry, Menuju Pelabuhan Bakauheni</h5>
+                            <p class="text-muted text-sm">Sebuah momen ketenangan yang terekam dari sisi kapal ferry saat senja mulai turun di perairan Selat Sunda. Siluet badan kapal dengan jendela-jendela kabin dan antena radar menjadi elemen foreground yang membingkai langit yang dipenuhi awan bergradasi keemasan. Matahari yang hampir tenggelam mengintip di balik perbukitan gelap, memantulkan cahaya hangat ke permukaan laut yang sedikit berombak. Komposisi diagonal dari badan kapal menambah kedalaman, sementara kontras antara struktur kapal yang gelap dan langit yang lembut menciptakan atmosfer tenang khas perjalanan menyeberangi lautan menjelang malam.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="portfolio-card h-100">
+                        <img src="Asset/WhatsApp Image 2026-06-26 at 2.24.44 PM.jpeg" alt="Malam di Kapal Ferry Merak">
+                        <div class="portfolio-content">
+                            <h5 class="fw-bold">Malam di Tengah Laut, Menuju Pelabuhan Merak</h5>
+                            <p class="text-muted text-sm">Foto ini menangkap suasana dramatis di malam hari dari area belakang kapal ferry, dengan struktur menara kapal bertuliskan "TRIMAS" sebagai titik fokus utama. Dua lampu sorot kapal yang menyala terang di bagian bawah menciptakan efek lens flare yang kuat, sementara seberkas sinar laser berwarna biru-ungu melintas secara diagonal di langit malam, memberikan sentuhan futuristik dan tak terduga pada pemandangan maritim yang biasanya tenang. Di kejauhan, tampak kerlip lampu dari kapal-kapal lain yang juga sedang berlayar di perairan, menambah kesan luasnya lautan pada malam hari. Permainan cahaya antara sorot lampu, laser, dan kegelapan langit menjadikan foto ini terasa sinematik dan penuh atmosfer.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="portfolio-card h-100">
+                        <img src="Asset/WhatsApp Image 2026-06-26 at 2.29.24 PM.jpeg" alt="Sunset di Pantai Padang">
+                        <div class="portfolio-content">
+                            <h5 class="fw-bold">Senja di Pantai Padang, Sumatera Barat</h5>
+                            <p class="text-muted text-sm">Sebuah pemandangan dramatis di garis pantai berbatu, di mana matahari bersinar terang tepat di garis horizon, dikelilingi oleh awan tipis yang membentuk pola halo di sekitarnya. Cahaya matahari memantul lurus ke permukaan laut, membentuk jalur cahaya keperakan yang membelah air hingga ke bibir pantai. Di bagian bawah foto, formasi bebatuan besar yang gelap menciptakan siluet kontras yang kuat dengan langit dan laut yang terang, sementara ombak kecil berbuih memecah di antara batu-batu tersebut. Kombinasi antara intensitas cahaya matahari, tekstur awan, dan tekstur bebatuan menjadikan foto ini terasa megah sekaligus damai.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-5 bg-white">
+        <div class="container mt-4 mb-5">
+            <h2 class="text-center fw-bold mb-5" style="color: #1a1a1a;">Hubungi Saya</h2>
+
+            <div class="mx-auto contact-box" style="max-width: 650px;">
+                <form>
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold text-secondary">Nama Lengkap</label>
+                        <input type="text" class="form-control" placeholder="Masukkan nama kamu...">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold text-secondary">Email</label>
+                        <input type="email" class="form-control" placeholder="Alamat email aktif...">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold text-secondary">Pesan</label>
+                        <textarea class="form-control" rows="5" placeholder="Tulis pesan yang ingin disampaikan..."></textarea>
+                    </div>
+
+                    <button class="btn btn-primary w-100 py-3 fw-bold" style="border-radius: 10px;">Kirim Pesan</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white text-center py-4">
+        <p class="mb-0 text-muted">&copy; 2026 Portfolio. Dibuat dengan Bootstrap 5.</p>
+    </footer>
+
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
